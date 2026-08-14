@@ -8,6 +8,13 @@ skills listed in the job posting from the resume.
 
 ### Frontend Setup
 
+Go to Frontend folder, install dependencies.
+
+```bash
+  npm install
+  npm rund ev
+```
+
 ### Django Backend Setup
 
 1. Go into the Backend folder and initialize python environment
@@ -16,6 +23,12 @@ skills listed in the job posting from the resume.
   python -m venv venv
   venv/Scripts/activate
   pip install django
+```
+
+2. Make sure ollama is running
+
+```bash
+  ollama run llama3.2
 ```
 
 ### How to run the server
