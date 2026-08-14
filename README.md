@@ -6,6 +6,8 @@ skills listed in the job posting from the resume.
 
 ## Dev Setup
 
+### Frontend Setup
+
 ### Django Backend Setup
 
 1. Go into the Backend folder and initialize python environment
