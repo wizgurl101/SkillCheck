@@ -44,6 +44,5 @@ def skill_check(request):
 ]
 
     return JsonResponse({
-        "message": "Resume processed successfully",
         "missing skills": missing_skills 
     })
