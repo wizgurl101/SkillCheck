@@ -32,11 +32,18 @@ def skill_check(request):
 
     resume_text = extract_text_from_pdf(resume)
     resume_skills = analyze_resume(resume_text)
+    resume_skills_list = resume_skills.split(", ")
     
     skills = analyze_job_posting(job_posting)
+    required_skills_list = skills.split(", ")
+    
+    missing_skills = [
+    skill
+    for skill in required_skills_list
+    if skill not in resume_skills_list
+]
 
     return JsonResponse({
         "message": "Resume processed successfully",
-        "job_posting_skills": skills,
-        "resume_skills": resume_skills
+        "missing skills": missing_skills 
     })
