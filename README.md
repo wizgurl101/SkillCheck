@@ -28,7 +28,7 @@ Go to Frontend folder, install dependencies.
 2. Make sure ollama is running
 
 ```bash
-  ollama run llama3.2
+  ollama run llama3.2:1b
 ```
 
 ### How to run the server

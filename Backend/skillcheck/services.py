@@ -58,3 +58,47 @@ Job posting:
     response = llm.invoke(prompt)
 
     return response.content
+
+
+def analyze_resume(resume_text):
+    llm = ChatOllama(
+        model="llama3.2:1b",
+        temperature=0
+    )
+
+    prompt = f"""
+You are a resume analyzer.
+
+Your task is to identify every technical skill explicitly
+mentioned in the resume.
+
+Technical skills include:
+- Programming languages such as Python, Java, JavaScript, C#, Go
+- Frameworks such as Django, React, Angular, Spring
+- Libraries
+- Databases
+- Cloud platforms
+- DevOps tools
+- Software development tools
+- AI and machine learning technologies
+
+IMPORTANT:
+- Only include skills that are explicitly mentioned in the resume.
+- Do not infer a skill from a job title.
+- Do not infer a skill from a project description unless the technology
+  is explicitly mentioned.
+- Include programming languages even if they appear in an
+  experience or project description.
+- Include each skill only once.
+- Return all technical skills you can find.
+
+Return ONLY a comma-separated list of technical skills.
+Do not provide explanations.
+
+Resume:
+{resume_text}
+"""
+
+    response = llm.invoke(prompt)
+
+    return response.content
