@@ -1,5 +1,10 @@
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
+from .services import extract_text_from_pdf
+
+
+@csrf_exempt
 def skill_check(request):
     if request.method != "POST":
         return JsonResponse(
@@ -22,9 +27,11 @@ def skill_check(request):
             status=400
         )
 
+    resume_text = extract_text_from_pdf(resume)
+
     return JsonResponse({
-        "message": "Received successfully",
+        "message": "Resume processed successfully",
         "job_posting": job_posting,
         "resume_filename": resume.name,
-        "resume_size": resume.size,
+        "resume_text": resume_text,
     })
