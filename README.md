@@ -38,3 +38,5 @@ Example:
     return JsonResponse({"message": "Hello World"}, status=200)
 
 ```
+
+In Postman, when calling the skill_check endpoint, do not add content-type in the header.
