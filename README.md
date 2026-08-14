@@ -8,6 +8,13 @@ skills listed in the job posting from the resume.
 
 ### Frontend Setup
 
+Go to Frontend folder, install dependencies.
+
+```bash
+  npm install
+  npm rund ev
+```
+
 ### Django Backend Setup
 
 1. Go into the Backend folder and initialize python environment
