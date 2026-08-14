@@ -25,6 +25,12 @@ Go to Frontend folder, install dependencies.
   pip install django
 ```
 
+2. Make sure ollama is running
+
+```bash
+  ollama run llama3.2
+```
+
 ### How to run the server
 
 ```bash
