@@ -3,7 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .services import (
     extract_text_from_pdf,
-    analyze_job_posting
+    analyze_job_posting,
+    analyze_resume
 )
 
 @csrf_exempt
@@ -30,12 +31,12 @@ def skill_check(request):
         )
 
     resume_text = extract_text_from_pdf(resume)
+    resume_skills = analyze_resume(resume_text)
     
     skills = analyze_job_posting(job_posting)
 
     return JsonResponse({
         "message": "Resume processed successfully",
-        "job_posting": job_posting,
-        "resume_filename": resume.name,
-        "job_posting_skills": skills
+        "job_posting_skills": skills,
+        "resume_skills": resume_skills
     })
