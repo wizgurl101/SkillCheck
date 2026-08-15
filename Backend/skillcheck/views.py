@@ -44,5 +44,5 @@ def skill_check(request):
 ]
 
     return JsonResponse({
-        "missing skills": missing_skills 
+        "missing_skills": missing_skills 
     })

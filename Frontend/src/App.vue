@@ -32,8 +32,7 @@ const checkSkills = async () => {
     }
 
     const data = await response.json();
-
-    console.log(data);
+    missingSkills.value = data.missing_skills;
 
     showMissingSkills.value = true;
   } catch (error) {
