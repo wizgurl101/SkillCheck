@@ -3,7 +3,44 @@ import { ref } from "vue";
 
 const jobPosting = ref("");
 const resume = ref<File | null>(null);
+const missingSkills = ref<string[]>([]);
 const showMissingSkills = ref(false);
+const isLoading = ref(false);
+
+const checkSkills = async () => {
+  if (!resume.value) {
+    console.log("Please select a resume");
+    return;
+  }
+
+  isLoading.value = true;
+  showMissingSkills.value = false;
+
+  const formData = new FormData();
+
+  formData.append("job_posting", jobPosting.value);
+  formData.append("resume", resume.value);
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/skillcheck/", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    missingSkills.value = data.missing_skills;
+
+    showMissingSkills.value = true;
+  } catch (error) {
+    console.error("Error checking skills:", error);
+  } finally {
+    isLoading.value = false;
+  }
+};
 </script>
 
 <template>
@@ -40,7 +77,9 @@ const showMissingSkills = ref(false);
                 size="large"
                 block
                 class="mt-6"
-                @click="showMissingSkills = true"
+                :loading="isLoading"
+                :disabled="isLoading"
+                @click="checkSkills"
               >
                 Check Skills
               </v-btn>
@@ -52,7 +91,9 @@ const showMissingSkills = ref(false);
             <v-card-title class="text-h5"> Missing Skills </v-card-title>
 
             <v-card-text>
-              <!-- Missing skills will eventually appear here -->
+              <v-chip v-for="skill in missingSkills" :key="skill" class="ma-1">
+                {{ skill }}
+              </v-chip>
             </v-card-text>
           </v-card>
         </div>
