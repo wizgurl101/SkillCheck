@@ -1,5 +1,7 @@
 # SkillCheck
 
+![Demo](./skillcheck_demo.gif)
+
 Web application that look at the job posting the user
 upload and their resume, the app will look for missing
 skills listed in the job posting from the resume.
