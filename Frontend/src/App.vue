@@ -3,13 +3,18 @@ import { ref } from "vue";
 
 const jobPosting = ref("");
 const resume = ref<File | null>(null);
+const missingSkills = ref<string[]>([]);
 const showMissingSkills = ref(false);
+const isLoading = ref(false);
 
 const checkSkills = async () => {
   if (!resume.value) {
     console.log("Please select a resume");
     return;
   }
+
+  isLoading.value = true;
+  showMissingSkills.value = false;
 
   const formData = new FormData();
 
@@ -28,11 +33,13 @@ const checkSkills = async () => {
 
     const data = await response.json();
 
-    const missingSkills = ref<string[]>([]);
-    missingSkills.value = data.missing_skills;
+    console.log(data);
+
     showMissingSkills.value = true;
   } catch (error) {
     console.error("Error checking skills:", error);
+  } finally {
+    isLoading.value = false;
   }
 };
 </script>
@@ -71,6 +78,8 @@ const checkSkills = async () => {
                 size="large"
                 block
                 class="mt-6"
+                :loading="isLoading"
+                :disabled="isLoading"
                 @click="checkSkills"
               >
                 Check Skills
