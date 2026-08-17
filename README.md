@@ -1,10 +1,17 @@
 # SkillCheck
 
-![Demo](./skillcheck_demo.gif)
+![Demo](./skillcheck.gif)
+[Watch Demo](./skillcheck_demo.mp4)
 
 Web application that look at the job posting the user
 upload and their resume, the app will look for missing
 skills listed in the job posting from the resume.
+
+Technologies learnt on project:
+
+- Django
+- LangChain and Ollama
+- Vue
 
 ## Dev Setup
 
@@ -57,3 +64,9 @@ Example:
 ```
 
 In Postman, when calling the skill_check endpoint, do not add content-type in the header.
+
+### Running application with Docker-Compose
+
+```bash
+  docker compose up --build -d
+```
