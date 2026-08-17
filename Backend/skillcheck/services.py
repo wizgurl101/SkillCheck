@@ -1,3 +1,4 @@
+import os
 import fitz
 
 from langchain_ollama import ChatOllama

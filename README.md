@@ -57,3 +57,9 @@ Example:
 ```
 
 In Postman, when calling the skill_check endpoint, do not add content-type in the header.
+
+### Running application with Docker-Compose
+
+```bash
+  docker compose up --build -d
+```
