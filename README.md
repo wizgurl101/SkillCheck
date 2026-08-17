@@ -8,9 +8,8 @@ upload and their resume, the app will look for missing
 skills listed in the job posting from the resume.
 
 Technologies learnt on project:
-
-- Django
 - LangChain and Ollama
+- Django
 - Vue
 
 ## Dev Setup
