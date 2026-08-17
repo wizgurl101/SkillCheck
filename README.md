@@ -1,6 +1,7 @@
 # SkillCheck
 
-![Demo](./skillcheck_demo.gif)
+![Demo](./skillcheck.gif)
+[Watch Demo](./skillcheck_demo.mp4)
 
 Web application that look at the job posting the user
 upload and their resume, the app will look for missing
