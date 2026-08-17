@@ -2,6 +2,8 @@ import fitz
 
 from langchain_ollama import ChatOllama
 
+OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+
 def extract_text_from_pdf(pdf_file):
     document = fitz.open(
         stream=pdf_file.read(),
@@ -20,7 +22,8 @@ def extract_text_from_pdf(pdf_file):
 def analyze_job_posting(job_posting):
     llm = ChatOllama(
         model="llama3.2:1b",
-        temperature=0
+        temperature=0,
+        base_url=OLLAMA_BASE_URL
     )
 
     prompt = f"""
@@ -63,7 +66,8 @@ Job posting:
 def analyze_resume(resume_text):
     llm = ChatOllama(
         model="llama3.2:1b",
-        temperature=0
+        temperature=0,
+        base_url=OLLAMA_BASE_URL
     )
 
     prompt = f"""

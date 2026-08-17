@@ -1,0 +1,62 @@
+services:
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: skillcheck-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./Backend:/app
+    env_file:
+      - ./Backend/.env
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    depends_on:
+      - ollama
+    networks:
+      - skillcheck-net
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: skillcheck-frontend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend
+    networks:
+      - skillcheck-net
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: skillcheck-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - skillcheck-net
+
+  ollama-pull:
+    image: ollama/ollama:latest
+    depends_on:
+      - ollama
+    networks:
+      - skillcheck-net
+    entrypoint: >
+      sh -c "
+        until ollama --host ollama:11434 list > /dev/null 2>&1; do
+          echo 'Waiting for Ollama to be ready...'
+          sleep 2
+        done &&
+        ollama --host ollama:11434 pull llama3.2:1b
+      "
+
+volumes:
+  ollama_data:
+
+networks:
+  skillcheck-net:
+    driver: bridge
