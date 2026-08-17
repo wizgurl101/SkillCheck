@@ -43,15 +43,17 @@ services:
     image: ollama/ollama:latest
     depends_on:
       - ollama
+    environment:
+      - OLLAMA_HOST=ollama:11434
     networks:
       - skillcheck-net
     entrypoint: >
       sh -c "
-        until ollama --host ollama:11434 list > /dev/null 2>&1; do
+        until ollama list > /dev/null 2>&1; do
           echo 'Waiting for Ollama to be ready...'
           sleep 2
         done &&
-        ollama --host ollama:11434 pull llama3.2:1b
+        ollama pull llama3.2:1b
       "
 
 volumes:
